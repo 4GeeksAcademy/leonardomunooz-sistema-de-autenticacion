@@ -1,29 +1,79 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { Context } from '../store/appContext';
+
+
+const initialUser = {
+    "email": "",
+    "password": ""
+}
 
 const Login = () => {
+
+    const [user, setUser] = useState(initialUser)
+    const { actions } = useContext(Context)
+
+    const handleChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
+    const handleSubmit = async (e) => {
+        if (user.email == "" || user.password == "") {
+            alert("Datos incompletos, verifique e intente nuevamente")
+            return
+        }
+        else {
+
+            const response = await actions.login(user)
+            console.log(response)
+            if (response) {
+                console.log("El usuario ha sido logueado exitosamente");
+                alert("Bienvenido")
+            } else {
+                setUser(initialUser)
+                console.log("Algo ha ocurrido");
+            }
+        }
+    }
+
     return (
 
-
-        <div className="container mx-auto " style={{ "width": "800px" }}>
-            <div className="row">
+        <div className="container m-auto " style={{ "width": "800px" }}>
+            <form className="row" onClick={(e) => e.preventDefault()}>
                 <div className="col-12">
                     <div className="mb-3">
-                        <label for="formGroupEmail" className="form-label">Email</label>
-                        <input type="text" className="form-control" id="formGroupEmail" placeholder="Example input email" />
+                        <label htmlFor="formGroupEmail" className="form-label">Email</label>
+                        <input
+                            id="formGroupEmail"
+                            type="text"
+                            className="form-control"
+                            placeholder="Example input email"
+                            name="email"
+                            value={user.email}
+                            onChange={handleChange} />
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="mb-3">
-                        <label for="formGroupPassword" className="form-label">Password</label>
-                        <input type="text" className="form-control" id="formGroupPassword" placeholder="Another input password" />
+                        <label htmlFor="formGroupPassword" className="form-label">Password</label>
+                        <input
+                            id="formGroupPassword"
+                            type="password"
+                            className="form-control"
+                            placeholder="Another input password"
+                            onChange={handleChange}
+                            value={user.password}
+                            name="password"
+                        />
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
+                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign in</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
     )

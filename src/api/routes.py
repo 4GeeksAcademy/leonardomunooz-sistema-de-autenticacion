@@ -59,7 +59,7 @@ def add_user():
 @api.route("/login", methods = ["POST"])
 def login():
     body = request.json
-    print('hola mundso')
+   
 
     # captura los campos que el cliente le mande. Si no manda nada o algo ocurre retorna None
     email = body.get("email", None)
@@ -70,10 +70,10 @@ def login():
         return jsonify("Necesitas las credenciales"), 400
     # caso contrario, crea el usuario y se hace un query para ver si el email de la bd es el mismo que envia el cliente
     else :
-
-        password  = set_password(password)
+        # hashea el password
         user = User()
         user = user.query.filter_by(email = email).one_or_none()
+        
         if user is None : 
             return jsonify({"Message": "bad credentials"}),404
         else :

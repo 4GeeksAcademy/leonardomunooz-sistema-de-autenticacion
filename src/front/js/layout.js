@@ -30,6 +30,8 @@ const Layout = () => {
                     {/* <Navbar /> */}
                     <Routes>
                         <Route element={<Home />} path="/" />
+
+                        {/* Renderiza el componente Demo cuando entre en la ruta /demo */}
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />

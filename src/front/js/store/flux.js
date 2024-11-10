@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			urlBase : "https://opulent-space-adventure-4jq4q4qpvgqp25xq6-3001.app.github.dev/api"
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -46,6 +47,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			login : async (user) => {
+				try{
+					const response  = await fetch(`${getStore().urlBase}/login`,{
+						method : "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body : JSON.stringify(user)
+					})
+					if (response.ok) {						
+						return true
+					}else {
+						return false
+					}
+				}catch(error){
+					console.log(error);
+				}
 			}
 		}
 	};
