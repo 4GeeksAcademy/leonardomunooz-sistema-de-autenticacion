@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Context } from '../store/appContext'
+import { Link } from 'react-router-dom'
 
 const initialUser = {
     "email": "",
@@ -72,6 +73,7 @@ const Signup = () => {
                     </div>
                 </div>
             </form>
+
         </div>
     )
 }

@@ -16,8 +16,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			urlBase : "https://opulent-space-adventure-4jq4q4qpvgqp25xq6-3001.app.github.dev/api"
+			urlBase : "https://opulent-space-adventure-4jq4q4qpvgqp25xq6-3001.app.github.dev/api",
+			token : null
 		},
+		
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {

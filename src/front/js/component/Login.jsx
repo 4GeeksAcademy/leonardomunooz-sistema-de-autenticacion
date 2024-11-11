@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Context } from '../store/appContext';
-
+import { Link } from 'react-router-dom';
 
 const initialUser = {
     "email": "",
@@ -74,7 +74,14 @@ const Login = () => {
                         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign in</button>
                     </div>
                 </div>
+
+
             </form>
+
+            <div className="col-12 d-flex justify-content-between">
+                <Link className='mt-4' to={"/signup"}> Registrarme</Link>
+                <Link className='mt-4' to={"/recuperar-contrasenia"}> Recuperar contrasenia</Link>
+            </div>
         </div>
 
     )

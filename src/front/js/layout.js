@@ -31,6 +31,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Login />} path="/" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Home />} path="/home" />
 
                         {/* Renderiza el componente Demo cuando entre en la ruta /demo */}
                         <Route element={<Demo />} path="/demo" />
