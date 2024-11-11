@@ -29,7 +29,8 @@ const Layout = () => {
                 <ScrollToTop>
                     {/* <Navbar /> */}
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Login />} path="/" />
+                        <Route element={<Login />} path="/login" />
 
                         {/* Renderiza el componente Demo cuando entre en la ruta /demo */}
                         <Route element={<Demo />} path="/demo" />
@@ -37,12 +38,8 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         
                         <Route element={<Signup />} path="/signup" />
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<Private />} path="/private" />
-                        
-
+                        <Route element={<Private />} path="/private" />     
                     </Routes>
-                    {/* <Footer /> */}
                 </ScrollToTop>
             </BrowserRouter>
         </div>

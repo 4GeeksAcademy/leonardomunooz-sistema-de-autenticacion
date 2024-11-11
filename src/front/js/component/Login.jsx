@@ -39,7 +39,8 @@ const Login = () => {
 
     return (
 
-        <div className="container m-auto " style={{ "width": "800px" }}>
+        <div className="container m-auto " style={{ "width": "600px" }}>
+            <h1 className='text-center mt-5' >login</h1>
             <form className="row" onClick={(e) => e.preventDefault()}>
                 <div className="col-12">
                     <div className="mb-3">

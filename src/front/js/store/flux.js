@@ -1,3 +1,5 @@
+// import Signup from "../component/Signup";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -21,7 +23,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
@@ -63,6 +64,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
 					}
 				}catch(error){
+					console.log(error);
+				}
+			},
+			signup : async (user) => {
+				try {
+					const response = await fetch(`${getStore().urlBase}/user`, {
+						method : "POST",
+						headers : {
+							"Content-Type" : "application/json"
+						},
+						body : JSON.stringify(user)
+					})
+
+					if (response.ok) {
+						console.log("El usuario ha sido registrado correctamente")
+						return true
+						 
+					}else {
+						alert("Algo ha ocurrido")
+						return false
+					}
+				} catch (error) {
 					console.log(error);
 				}
 			}
