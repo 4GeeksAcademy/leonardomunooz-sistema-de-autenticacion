@@ -59,7 +59,6 @@ def add_user():
 @api.route("/login", methods = ["POST"])
 def login():
     body = request.json
-   
 
     # captura los campos que el cliente le mande. Si no manda nada o algo ocurre retorna None
     email = body.get("email", None)
@@ -83,10 +82,3 @@ def login():
                 return jsonify({"token": token}), 200
             else :
                 return jsonify({"Message": "bad credentials"}), 400
-
-
-  
-
-
-
-  # COntent type applicaciont json... del lado del cliente >>>>>???

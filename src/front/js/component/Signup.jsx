@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Context } from '../store/appContext'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 const initialUser = {
     "email": "",
@@ -27,13 +27,10 @@ const Signup = () => {
         }
         const response = await actions.signup(user)
         if (response) {
-            console.log("El usuario ha sido registrado exitosamente");
         } else {
             setUser(initialUser)
             console.log("Algo ha ocurrido");
         }
-
-
     }
     return (
         <div className="container m-auto" style={{ "width": "600px" }}>
@@ -74,6 +71,9 @@ const Signup = () => {
                 </div>
             </form>
 
+            <div className="col-12 d-flex justify-content-center">
+                <Link className='mt-4' to={"/login"}> Ir al login </Link>
+            </div>
         </div>
     )
 }

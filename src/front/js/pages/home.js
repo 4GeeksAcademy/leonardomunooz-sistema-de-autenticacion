@@ -8,11 +8,11 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center mt-5">	
+		
 			{
-				store.token ? 
-					<h1>Vista privada</h1> : 
-						<Navigate to= "/login" />
+				store.token ? <h1>Vista privada</h1> : <Navigate to= "/login" />
+ 			
 			}
 			
 		</div>

@@ -1,5 +1,7 @@
 // import Signup from "../component/Signup";
 
+import { Navigate, useNavigate } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -16,8 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			urlBase : "https://opulent-space-adventure-4jq4q4qpvgqp25xq6-3001.app.github.dev/api",
-			token : null
+			token : sessionStorage.getItem("token") ||  null
 		},
 		
 		actions: {
@@ -53,14 +54,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			login : async (user) => {
 				try{
-					const response  = await fetch(`${getStore().urlBase}/login`,{
+					const response  = await fetch(`${process.env.BACKEND_URL}/api/login`,{
 						method : "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
 						body : JSON.stringify(user)
 					})
-					if (response.ok) {						
+
+					// devuelve el token
+					const data =  await response.json()
+
+					if (response.status == 200) {		
+						setStore({
+							token : data.token
+						})
+						sessionStorage.setItem("token", data.token)				
 						return true
 					}else {
 						return false
@@ -71,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			signup : async (user) => {
 				try {
-					const response = await fetch(`${getStore().urlBase}/user`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user`, {
 						method : "POST",
 						headers : {
 							"Content-Type" : "application/json"
@@ -79,20 +88,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body : JSON.stringify(user)
 					})
 
-					if (response.ok) {
-						console.log("El usuario ha sido registrado correctamente")
+					if (response.status == 201) {
 						return true
 						 
 					}else {
-						alert("Algo ha ocurrido")
 						return false
 					}
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			logout : () => {
+				if (getStore().token !== null) {
+					sessionStorage.removeItem("token")
+					return true
+				}else {
+					return false
+				}
+				
 			}
 		}
 	};
 };
 
 export default getState;
+
+
+
+// probar con integracion sessionStorage

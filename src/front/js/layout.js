@@ -29,17 +29,19 @@ const Layout = () => {
                 <ScrollToTop>
                     {/* <Navbar /> */}
                     <Routes>
+
+                        {/* Layout contiene pages y las pages contienen componentes */}
+
                         <Route element={<Login />} path="/" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Home />} path="/home" />
-
-                        {/* Renderiza el componente Demo cuando entre en la ruta /demo */}
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<h1>Not found!</h1>} />
-                        
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Private />} path="/private" />     
+                        <Route element={<h1>Not found!</h1>} path="*"/>
+
+                        {/* Renderiza el componente Demo cuando entre en la ruta /demo */}
+                        {/* <Route element={<Demo />} path="/demo" /> */}
+                        {/* <Route element={<Single />} path="/single/:theid" /> */}
+                        
                     </Routes>
                 </ScrollToTop>
             </BrowserRouter>

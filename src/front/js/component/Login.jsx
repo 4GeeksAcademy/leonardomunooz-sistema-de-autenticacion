@@ -1,6 +1,9 @@
+// con export defaul se importa sin llaves.
+// con export const Componente (export nombrado) se importa con llaves
+
 import React, { useState, useContext } from 'react'
 import { Context } from '../store/appContext';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const initialUser = {
     "email": "",
@@ -11,6 +14,7 @@ const Login = () => {
 
     const [user, setUser] = useState(initialUser)
     const { actions } = useContext(Context)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setUser({
@@ -26,13 +30,12 @@ const Login = () => {
         else {
 
             const response = await actions.login(user)
-            console.log(response)
             if (response) {
-                console.log("El usuario ha sido logueado exitosamente");
-                alert("Bienvenido")
+                navigate("/private")
+
             } else {
                 setUser(initialUser)
-                console.log("Algo ha ocurrido");
+                console.log("ALGO HA OCURRIDO");
             }
         }
     }
@@ -71,7 +74,7 @@ const Login = () => {
                 </div>
                 <div className="col-12">
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign in</button>
+                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Log in</button>
                     </div>
                 </div>
 
