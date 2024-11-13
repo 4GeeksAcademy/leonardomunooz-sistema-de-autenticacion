@@ -4,6 +4,7 @@
 import React, { useState, useContext } from 'react'
 import { Context } from '../store/appContext';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 const initialUser = {
     "email": "",

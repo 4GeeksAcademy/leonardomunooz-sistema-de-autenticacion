@@ -1,16 +1,20 @@
 import React, {useContext, useEffect} from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Swal from 'sweetalert2'
+
 export const Navbar = () => {
 	const  {store, actions } = useContext(Context) 
 	const navigate = useNavigate()
 
-	const handleLogut = ({target}) =>{
-
-			if (actions.logout()) {
-				navigate("/login")
+	const handleLogut = () =>{
+			const isLogout =  actions.logout()
+			if (isLogout) {
+				location.reload()
+			}else {
+				console.log('algo ha ocurrido navbar')
 			}
-			return
+		
 	}
 	return (
 		<nav className="navbar navbar-light bg-light">

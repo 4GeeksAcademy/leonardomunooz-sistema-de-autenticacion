@@ -98,7 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			logout : () => {
+			logout : async () => {
 				if (getStore().token !== null) {
 					sessionStorage.removeItem("token")
 					return true
