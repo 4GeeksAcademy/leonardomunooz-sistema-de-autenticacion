@@ -45,15 +45,18 @@ def add_user():
     password = set_password(password)
     user = User(email = email, password = password)
 
+    if user is    None: 
+        return jsonify({"Message": "User already exists"}), 409
+    else :
     #  validar si existe o no el ususario en la base de datos 
-    try : 
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"Message": "User created"}), 201
-    except Exception as error:
-        print(error.args)
-        db.session.rollback()
-        return jsonify({"Message":f"error : {error}"}), 500
+        try : 
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({"Message": "User created"}), 201
+        except Exception as error:
+            print(error.args)
+            db.session.rollback()
+            return jsonify({"Message":f"error : {error}"}), 500
 
 
 @api.route("/login", methods = ["POST"])
@@ -74,7 +77,7 @@ def login():
         user = user.query.filter_by(email = email).one_or_none()
         
         if user is None : 
-            return jsonify({"Message": "bad credentials"}),404
+            return jsonify({"Message": "User not found!"}),404
         else :
             # valida si el password de la tabla User es igual a la que envia el cliente
             if check_password(user.password, password):

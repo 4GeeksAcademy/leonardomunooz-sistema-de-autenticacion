@@ -64,16 +64,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					// devuelve el token
 					const data =  await response.json()
-
+					console.log(response.status)
 					if (response.status == 200) {		
 						setStore({
 							token : data.token
 						})
 						sessionStorage.setItem("token", data.token)				
 						return true
-					}else {
-						return false
-					}
+					} else if (response.status == 404){
+						return 404
+					} 
 				}catch(error){
 					console.log(error);
 				}

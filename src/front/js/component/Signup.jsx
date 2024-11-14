@@ -25,13 +25,29 @@ const Signup = () => {
 
         if (user.email == "" || user.password == "") {
             console.log("Datos incompletos, verifique e intente nuevamente")
+            Swal.fire({
+                title: "Alguno de los campos estan vacios",
+                text: "Verifique nuevamente",
+                icon: "question"
+            });
             return
         }
         const response = await actions.signup(user)
+
         if (response) {
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "User Created",
+                showConfirmButton: true
+            });
         } else {
-            setUser(initialUser)
-            console.log("Algo ha ocurrido");
+            Swal.fire({
+                position: "top-center",
+                icon: "error",
+                title: "El usuario ya existe",
+                showConfirmButton: true
+            });
         }
     }
     return (

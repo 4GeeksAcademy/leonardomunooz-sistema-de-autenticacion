@@ -7,23 +7,23 @@ export const Navbar = () => {
 	const  {store, actions } = useContext(Context) 
 	const navigate = useNavigate()
 
-	const handleLogut = () =>{
-			const isLogout =  actions.logout()
-			if (isLogout) {
-				location.reload()
-			}else {
-				console.log('algo ha ocurrido navbar')
-			}
+	// const handleLogut = () =>{
+	// 		const isLogout =  actions.logout()
+	// 		if (isLogout) {
+	// 			location.reload()
+	// 		}else {
+	// 			console.log('algo ha ocurrido navbar')
+	// 		}
 		
-	}
+	// }
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container d-flex justify-content-end" >
 				<div className="">
-					<Link to="">
+					<Link to="/login">
 						<button 
 							className="btn btn-danger"
-							onClick={handleLogut}
+							onClick={()=> actions.logout()}
 						>cerrar sesion</button>
 					</Link>
 				</div>

@@ -25,18 +25,41 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         if (user.email == "" || user.password == "") {
-            alert("Datos incompletos, verifique e intente nuevamente")
+            Swal.fire({
+                title: "Alguno de los campos estan vacios",
+                text: "Verifique nuevamente",
+                icon: "question"
+            });
             return
         }
+
         else {
 
             const response = await actions.login(user)
-            if (response) {
-                navigate("/private")
 
+            if (!response) {
+                Swal.fire({
+                    position: "top-center",
+                    icon: "error",
+                    title: "Datos incorrectos, verifique nuevamente",
+                    showConfirmButton: true
+                });
+            }
+            if (response == 404) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Usuario no existe, ¿Desea crear uno nuevo?",
+                    footer: '<Link to="/signup">ir a login</Link>'
+                });
             } else {
-                setUser(initialUser)
-                console.log("ALGO HA OCURRIDO");
+                if (response) {
+                    navigate("/private")
+
+                } else {
+                    setUser(initialUser)
+                    console.log("ALGO HA OCURRIDO");
+                }
             }
         }
     }
